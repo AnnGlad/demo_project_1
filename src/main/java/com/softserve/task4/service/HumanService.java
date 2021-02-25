@@ -2,15 +2,16 @@ package com.softserve.task4.service;
 
 import com.softserve.task4.models.Human;
 
+import static com.softserve.task4.models.Human.getFullName;
+
 public class HumanService {
 
     public static void compatibilityTest(Human humanOne, Human humanTwo) {
 
-        System.out.println("Checking if you may speack with each other");
+        System.out.println("Checking if you may speak with each other");
         humanOne.speak(humanTwo);
-
 //        humanOne.spendTimeTogether(humanTwo);
-        System.out.println("Checking if you may have relationship...");
+        System.out.println("Checking if " + getFullName(humanOne) + " and " + getFullName(humanTwo) + " may have relationship...");
         humanOne.haveRelationship(humanTwo);
     }
 }

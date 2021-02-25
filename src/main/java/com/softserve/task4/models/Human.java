@@ -113,12 +113,20 @@ public class Human {
         return this.isGender() ? "male" : "female";
     }
 
+    public static String capitalizeFirstLetter(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
+    public static String getFullName(Human human) {
+        return capitalizeFirstLetter(human.getFirstName()) + " " + capitalizeFirstLetter(human.getLastName());
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "gender: " + whatGender() +
-                ", firstName: " + firstName.substring(0, 1).toUpperCase() +firstName.substring(1, firstName.length()).toLowerCase()  +
-                ", lastName: " + lastName.substring(0, 1).toUpperCase() +lastName.substring(1, lastName.length()).toLowerCase() +
+                ", firstName: " + capitalizeFirstLetter(firstName) +
+                ", lastName: " + capitalizeFirstLetter(lastName) +
                 ", height: " + height +
                 ", weight: " + weight +
                 '}';
