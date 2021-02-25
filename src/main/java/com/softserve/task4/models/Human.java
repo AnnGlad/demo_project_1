@@ -14,25 +14,59 @@ public class Human {
         this.height = height;
         this.weight = weight;
     }
-
+//
     public boolean speak(Human human) {
-
+        if (this.gender && human.gender) {
+            return Math.random() <= 0.5;
+        }
         return true;
     }
 
+//
     protected boolean tolerate(Human human) {
-
-        return true;
+        if (this.gender && human.gender) {
+            //if both male
+            return Math.random() <= 0.056;
+        } else if (!this.gender && !human.gender) {
+            //if both female
+            return Math.random() <= 0.05;
+        } else {
+            return Math.random() <= 0.7;
+        }
+//        return  true;
+    }
+//
+    public boolean spendTimeTogether(Human human) {
+            if (differPercentage(this.height, human.height) > 10) {
+                return Math.random() <= 0.95;
+            } else {
+                return Math.random() <= 0.85;
+            }
     }
 
-    protected boolean spendTimeTogether(Human human) {
+        public float differPercentage(float v1, float v2) {
+        float result = ((v1 - v2) / ((v1 + v2) / 2)) * 100;
+        return result < 0 ? -result : result;
+    }
+    //
 
-        return true;
+    /*MINE*/
+    public Human giveBirthTo(Human human) {
+        return null;
     }
 
     public Human haveRelationship(Human human) {
-
-        return null;
+        if (this.gender == human.gender) {
+            System.out.println("Sorry, did not work out");
+            return null;
+        } else if (this.speak(human) && this.tolerate(human) && this.spendTimeTogether(human)) {
+            Human child = this.isGender() ? human.giveBirthTo(this) : this.giveBirthTo(human);
+            System.out.println("That is how your child may look like: " + child.toString());
+            return child;
+        } else {
+            System.out.println("Sorry, did not work out. Broken up.");
+            return null;
+        }
     }
 
     public boolean isGender() {
@@ -75,14 +109,18 @@ public class Human {
         this.weight = weight;
     }
 
+    public String whatGender() {
+        return this.isGender() ? "male" : "female";
+    }
+
     @Override
     public String toString() {
-        return "task_at_4.models.Human{" +
-                "gender=" + gender +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
+        return "{" +
+                "gender: " + whatGender() +
+                ", firstName: " + firstName.substring(0, 1).toUpperCase() +firstName.substring(1, firstName.length()).toLowerCase()  +
+                ", lastName: " + lastName.substring(0, 1).toUpperCase() +lastName.substring(1, lastName.length()).toLowerCase() +
+                ", height: " + height +
+                ", weight: " + weight +
                 '}';
     }
 }
